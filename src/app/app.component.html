@@ -25,19 +25,23 @@
   </div> 
   <br>
   <div class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 400px;">
+    <article class="card-body">
       <h4 class="card-title mt-3 text-center">Available Classrooms</h4>
       <p-table [value]="cars">
         <ng-template pTemplate="header">
-            <tr>
-                <th>Vin</th>
-                <th>Year</th>
-                <th>Brand</th>
-                <th>Color</th>
+            <tr style="text-align: center;">
+                <th>Classroom</th>
+                <th>Capacity</th>
+                <th>Building</th>
+                <th>Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-car>
-            <tr>
+            <tr style="text-align: center;">
+                <td>101</td>
+                <td>50</td>
+                <td>CS</td> 
+                <th>Action</th>
             </tr>
         </ng-template>
       </p-table>
