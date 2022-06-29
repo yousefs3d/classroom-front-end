@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TableModule} from 'primeng/table';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
+import { ClassroomService } from './service/classroom/classroom.service';
 
 @NgModule({
   declarations: [
@@ -12,11 +13,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     TableModule
   ],
-  providers: [],
+  providers: [ClassroomService],
   bootstrap: [AppComponent],
-  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
