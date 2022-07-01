@@ -3,18 +3,18 @@
   <div class="card bg-light">
     <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Create Classroom</h4>
-      <form>
+      <form [formGroup]="classroomForm" (ngSubmit)="addClassroom()">
         <div class="form-group input-group">
-          <input name="" class="form-control" placeholder="Classroom" type="text">
+          <input name="" class="form-control" formControlName="room" placeholder="Classroom" type="text">
         </div>
         <div class="form-group input-group">
-          <input name="" class="form-control" placeholder="Capacity" type="text">
+          <input name="" class="form-control" formControlName="capacity" placeholder="Capacity" type="text">
         </div>
         <div class="form-group input-group">
-          <input name="" class="form-control" placeholder="Building" type="text">
+          <input name="" class="form-control" formControlName="building" placeholder="Building" type="text">
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block"> Add</button>
+          <button type="submit" class="btn btn-primary btn-block">Add</button>
         </div>
       </form>
     </article>
@@ -23,7 +23,14 @@
   <div class="card bg-light">
     <article class="card-body">
       <h4 class="card-title mt-3 text-center">Available Classrooms</h4>
-      <p-table [value]="cars">
+      <p-table 
+      [value]="classrooms" 
+      styleClass="p-datatable-gridlines"
+      [paginator]="true" 
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[10,25,50]">
         <ng-template pTemplate="header">
             <tr style="text-align: center;">
                 <th>Classroom</th>
@@ -32,17 +39,17 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-car>
+        <ng-template pTemplate="body" let-classroom>
             <tr style="text-align: center;">
-                <td>101</td>
-                <td>50</td>
-                <td>CS</td> 
-                <th>Action</th>
+                <td>{{classroom.room}}</td>
+                <td>{{classroom.capacity}}</td>
+                <td>{{classroom.building}}</td> 
+                <td>Action</td>
             </tr>
         </ng-template>
       </p-table>
     </article>
   </div>
 </div>
-
+<br><br><br><br>
 <router-outlet></router-outlet>

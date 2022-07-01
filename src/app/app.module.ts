@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TableModule} from 'primeng/table';
 import { ClassroomService } from './service/classroom/classroom.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ClassroomService } from './service/classroom/classroom.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    TableModule
+    TableModule,
+    ButtonModule,
+    ReactiveFormsModule
   ],
   providers: [ClassroomService],
   bootstrap: [AppComponent],
