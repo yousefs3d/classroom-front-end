@@ -17,47 +17,80 @@ export class AppComponent implements OnInit {
     room: new FormControl(''),
     capacity: new FormControl(''),
     building: new FormControl('')
+  });
+  updateClassroomForm = new FormGroup({
+    id: new FormControl(),
+    room: new FormControl(''),
+    capacity: new FormControl(''),
+    building: new FormControl('')
   })
+  
+  readonly ID: string = 'id';
+  readonly ROOM: string = 'room';
+  readonly CAPACITY: string = 'capacity';
+  readonly BUILDING: string = 'building';
+
 
   constructor(
     private classroomService: ClassroomService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getAllClassrooms();
   }
 
   getAllClassrooms(): void {
     this.classroomService.getAllClassrooms().subscribe(res => {
-      console.log("Result: " + JSON.stringify(res));
       this.classrooms = res;
-      console.log("classrooms Result: " + JSON.stringify(this.classrooms));
     });
+  }
+  getClassroomFormControl(formControlName: string): any{
+    return this.classroomForm.get(formControlName);
+  }
+
+  getUpdateClassroomFormControl(formControlName: string): any{
+    return this.updateClassroomForm.get(formControlName);
+  }
+
+  clearForm(): void{
+    this.getClassroomFormControl(this.ROOM).setValue(null);
+    this.getClassroomFormControl(this.CAPACITY).setValue(null);
+    this.getClassroomFormControl(this.BUILDING).setValue(null);
   }
 
   addClassroom(): void {
     this.classroomService.addClassroom(this.classroomForm?.value).subscribe(res => {
       this.getAllClassrooms();
+      this.clearForm();
     });
   }
 
-  updateClassroom(classroom: any): void{
-    // Call service
+  updateClassroom(): void{
+    // console.log("Inside Update: "+ JSON.stringify(this.updateClassroomForm?.value));
+    this.classroomService.updateClassroom(this.updateClassroomForm?.value).subscribe(res =>{
+      this.getAllClassrooms();
+      this.display = false;
+    })
   }
 
-  showDialog() {
+  showDialog(classroom: any): void {
+    // console.log("Inside show dialog: "+ JSON.stringify(classroom));
+    this.getUpdateClassroomFormControl(this.ID).setValue(classroom.id);
+    this.getUpdateClassroomFormControl(this.ROOM).setValue(classroom.room);
+    this.getUpdateClassroomFormControl(this.CAPACITY).setValue(classroom.capacity);
+    this.getUpdateClassroomFormControl(this.BUILDING).setValue(classroom.building);
     this.display = true;
 }
 
-  next() {
+  next(): void {
     this.first = this.first + this.rows;
   }
 
-  prev() {
+  prev(): void {
     this.first = this.first - this.rows;
   }
 
-  reset() {
+  reset(): void {
     this.first = 0;
   }
 

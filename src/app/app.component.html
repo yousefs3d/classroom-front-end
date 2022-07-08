@@ -40,7 +40,7 @@
             <td>{{classroom.capacity}}</td>
             <td>{{classroom.building}}</td>
             <td>
-              <button pButton pRipple type="button" icon="pi pi-pencil" (click)="showDialog()"
+              <button pButton pRipple type="button" icon="pi pi-pencil" (click)="showDialog(classroom)"
                 class="p-button-rounded p-button-text"></button>
             </td>
           </tr>
@@ -54,7 +54,7 @@
         <ng-template pTemplate="header">
           <h4 class="card-title mt-3 text-center">Edit Classroom</h4>
         </ng-template>
-        <form [formGroup]="classroomForm">
+        <form [formGroup]="updateClassroomForm">
           <div class="form-group input-group">
             <input name="" class="form-control" formControlName="room" placeholder="Classroom" type="text">
           </div>
@@ -68,7 +68,7 @@
           </div>
         </form>
         <ng-template pTemplate="footer">
-          <button type="submit" class="btn btn-primary btn-block">Update</button>
+          <button type="submit" (click)="updateClassroom()" class="btn btn-primary btn-block">Update</button>
         </ng-template>
       </p-dialog>
     <!-- </article> -->
