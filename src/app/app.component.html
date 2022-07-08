@@ -42,6 +42,9 @@
             <td>
               <button pButton pRipple type="button" icon="pi pi-pencil" (click)="showDialog(classroom)"
                 class="p-button-rounded p-button-text"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteClassroom(classroom.id)"
+                class="p-button-rounded p-button-text"></button>
+                
             </td>
           </tr>
         </ng-template>

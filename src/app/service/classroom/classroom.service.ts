@@ -7,6 +7,9 @@ const CLASSROOM_URL: string = '/api/school/class';
 const ALL_CLASSROOMS_URL: string = '/all';
 const ADD_CLASSROOM_URL: string = '/add';
 const UPDATE_CLASSROOM_URL: string = '/update';
+const DELETE_CLASSROOM_URL: string = '/delete/';
+
+
 
 
 
@@ -26,7 +29,11 @@ export class ClassroomService {
   }
 
   public updateClassroom(classroomVM: any): Observable<any>{
-    return this.http.post(`${this.apiServerUrl}`+CLASSROOM_URL + ADD_CLASSROOM_URL, classroomVM)
+    return this.http.put(`${this.apiServerUrl}`+CLASSROOM_URL + UPDATE_CLASSROOM_URL, classroomVM)
+  }
+
+  public deleteClassroom(id: number): Observable<any>{
+    return this.http.delete(`${this.apiServerUrl}`+CLASSROOM_URL + DELETE_CLASSROOM_URL + id)
   }
 
 }

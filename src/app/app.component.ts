@@ -73,6 +73,13 @@ export class AppComponent implements OnInit {
     })
   }
 
+  deleteClassroom(id: number): void{
+    console.log("Inside delete classroom"+JSON.stringify(id));
+    this.classroomService.deleteClassroom(id).subscribe(res =>{
+      this.getAllClassrooms();
+    })
+  }
+
   showDialog(classroom: any): void {
     // console.log("Inside show dialog: "+ JSON.stringify(classroom));
     this.getUpdateClassroomFormControl(this.ID).setValue(classroom.id);
