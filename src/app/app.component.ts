@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
   }
 
   updateClassroom(): void{
-    // console.log("Inside Update: "+ JSON.stringify(this.updateClassroomForm?.value));
     this.classroomService.updateClassroom(this.updateClassroomForm?.value).subscribe(res =>{
       this.getAllClassrooms();
       this.display = false;
@@ -74,7 +73,6 @@ export class AppComponent implements OnInit {
   }
 
   deleteClassroom(id: number): void{
-    console.log("Inside delete classroom"+JSON.stringify(id));
     this.classroomService.deleteClassroom(id).subscribe(res =>{
       this.getAllClassrooms();
     })
