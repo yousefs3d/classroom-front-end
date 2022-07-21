@@ -11,10 +11,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import { ClassroomComponent } from './classroom/classroom.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClassroomComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,
