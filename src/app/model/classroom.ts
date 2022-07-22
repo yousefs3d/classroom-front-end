@@ -3,4 +3,5 @@ export interface Classroom{
     room: string;
     capacity: number;
     building: string;    
+    label: any;
 }
