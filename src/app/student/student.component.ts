@@ -16,8 +16,10 @@ export class StudentComponent implements OnInit {
   rows = 10;
   students: Student[] = [];
   classrooms: Classroom[] = [];
-  labeledClassrooms: [] = [];
   display: boolean = false;
+  showStudentDetails: boolean = false;
+  studentDetails: any;
+  studentClassrooms: any;
   studentForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -31,7 +33,7 @@ export class StudentComponent implements OnInit {
     mobile: new FormControl(''),
     classroomIds: new FormControl([])
   })
-  
+
   readonly ID: string = 'id';
   readonly NAME: string = 'name';
   readonly EMAIL: string = 'email';
@@ -54,27 +56,27 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  getAllStudentsAndClassrooms(): void{
+  getAllStudentsAndClassrooms(): void {
     let students = this.studentService.getAllStudents();
     let classrooms = this.classroomService.getAllClassrooms();
-    forkJoin([students,classrooms]).subscribe(result =>{
+    forkJoin([students, classrooms]).subscribe(result => {
       this.students = result[0];
       this.classrooms = result[1];
-      this.classrooms.map(classroom =>{
+      this.classrooms.map(classroom => {
         classroom.label = classroom.room.concat('-').concat(classroom.building);
       });
-    });  
+    });
   }
 
-  getStudentFormControl(formControlName: string): any{
+  getStudentFormControl(formControlName: string): any {
     return this.studentForm.get(formControlName);
   }
 
-  getUpdateStudentFormControl(formControlName: string): any{
+  getUpdateStudentFormControl(formControlName: string): any {
     return this.updateStudentForm.get(formControlName);
   }
 
-  clearForm(): void{
+  clearForm(): void {
     this.getStudentFormControl(this.NAME).setValue(null);
     this.getStudentFormControl(this.EMAIL).setValue(null);
     this.getStudentFormControl(this.MOBILE).setValue(null);
@@ -88,15 +90,15 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  updateStudent(): void{
-    this.studentService.updateStudent(this.updateStudentForm?.value).subscribe(res =>{
+  updateStudent(): void {
+    this.studentService.updateStudent(this.updateStudentForm?.value).subscribe(res => {
       this.getAllStudents();
       this.display = false;
     })
   }
 
-  deleteStudent(id: number): void{
-    this.studentService.deleteStudent(id).subscribe(res =>{
+  deleteStudent(id: number): void {
+    this.studentService.deleteStudent(id).subscribe(res => {
       this.getAllStudents();
     })
   }
@@ -107,7 +109,19 @@ export class StudentComponent implements OnInit {
     this.getUpdateStudentFormControl(this.EMAIL).setValue(student.email);
     this.getUpdateStudentFormControl(this.MOBILE).setValue(student.mobile);
     this.display = true;
-}
+  }
+
+  displayStudentDetails(student: any): void {
+    this.studentDetails = student;
+    this.studentService.getStudentClassrooms(this.studentDetails.id).subscribe(res => {
+      this.studentClassrooms = res;
+      this.showStudentDetails = true;
+    });
+  }
+
+  closeStudentDetails(): void{
+    this.showStudentDetails = false;
+  }
 
   next(): void {
     this.first = this.first + this.rows;
